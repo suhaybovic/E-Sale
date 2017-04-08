@@ -1,0 +1,15 @@
+﻿<div class="thumbnail">
+    <img id="prof" src="https://placehold.it/350x150" class="img-circle text-center" alt="...">
+    <div class="text-center">
+        <h4 id="Username">@Model.Name</h4>
+    </div>
+</div>
+<br />
+<div class="thumbnail">
+    <ul class="nav nav-pills nav-stacked">
+        <li>@Html.ActionLink("Home", "Home", new { id = @Model.ID })</li>
+        <li>@Html.ActionLink("Product", "Product", new { id = @Model.ID })</li>
+        <li><a href="#section3">News</a></li>
+        <li><a href="#section3">Follwers</a></li>
+    </ul>
+</div>

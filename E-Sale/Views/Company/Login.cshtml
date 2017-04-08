@@ -1,0 +1,86 @@
+﻿@model E_Sale.ViewModel.LoginCompanyViewModel
+
+
+<link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<style>
+    .wrapper {
+        margin-bottom: 80px;
+        width: 50em;
+        background-color: white;
+        margin: 0 auto;
+    }
+
+    .jumbotron {
+        background-color: white;
+        margin-top: 25px;
+    }
+
+    body {
+        background-image: url(../assets/images/pw_maze_white.png);
+        background-repeat: repeat;
+    }
+
+    .wrapper {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+
+    label {
+        text-align: left !important;
+    }
+
+    .cursive {
+        font-family: 'Exo 2', sans-serif;
+    }
+</style>
+
+<header>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="cursive">Sign IN </h1>
+        </div>
+    </div>
+</header>
+
+
+<div class="wrapper">
+    <div class="form-signin">
+        <h2 class="form-signin-heading">Sign Up</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>LoginCompanyViewModel</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">           
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">                      
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+

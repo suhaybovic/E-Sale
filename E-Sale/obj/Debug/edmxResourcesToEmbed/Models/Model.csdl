@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Area" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK_Company_Address" FromRole="Address" ToRole="Company" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Address" FromRole="Address" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="PostID" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_PostID" FromRole="Comment" ToRole="Post" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserID_Comment" FromRole="Comment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Field" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProfilePhoto" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Address1" Relationship="Self.FK_Company_Address" FromRole="Company" ToRole="Address" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Company_ID" FromRole="Company" ToRole="Post" />
+    <NavigationProperty Name="Photo" Relationship="Self.FK_Company_Photo" FromRole="Company" ToRole="Photo" />
+    <NavigationProperty Name="Followings" Relationship="Self.FK_Following_Company" FromRole="Company" ToRole="Following" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Following">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="CompanyID" Type="Int32" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_Following_Company" FromRole="Following" ToRole="Company" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Following_User" FromRole="Following" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Friend">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="User1" Type="Int32" Nullable="false" />
+    <Property Name="User2" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Friend_User1" FromRole="Friend" ToRole="User" />
+    <NavigationProperty Name="User3" Relationship="Self.FK_Friend_User2" FromRole="Friend" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="PostID" Type="Int32" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Post_ID" FromRole="Like" ToRole="Post" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserID" FromRole="Like" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="URL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK_Company_Photo" FromRole="Photo" ToRole="Company" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Post_Photo" FromRole="Photo" ToRole="Post" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Photo" FromRole="Photo" ToRole="User" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_ProfilePhoto" FromRole="Photo" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Photo" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_PostID" FromRole="Post" ToRole="Comment" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_Company_ID" FromRole="Post" ToRole="Company" />
+    <NavigationProperty Name="Likes" Relationship="Self.FK_Post_ID" FromRole="Post" ToRole="Like" />
+    <NavigationProperty Name="Photo1" Relationship="Self.FK_Post_Photo" FromRole="Post" ToRole="Photo" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_ID" FromRole="Post" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ProfilePhoto" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Address1" Relationship="Self.FK_User_Address" FromRole="User" ToRole="Address" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_UserID_Comment" FromRole="User" ToRole="Comment" />
+    <NavigationProperty Name="Followings" Relationship="Self.FK_Following_User" FromRole="User" ToRole="Following" />
+    <NavigationProperty Name="Friends" Relationship="Self.FK_Friend_User1" FromRole="User" ToRole="Friend" />
+    <NavigationProperty Name="Friends1" Relationship="Self.FK_Friend_User2" FromRole="User" ToRole="Friend" />
+    <NavigationProperty Name="Like" Relationship="Self.FK_UserID" FromRole="User" ToRole="Like" />
+    <NavigationProperty Name="Photo" Relationship="Self.FK_User_Photo" FromRole="User" ToRole="Photo" />
+    <NavigationProperty Name="Photo1" Relationship="Self.FK_User_ProfilePhoto" FromRole="User" ToRole="Photo" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_User_ID" FromRole="User" ToRole="Post" />
+  </EntityType>
+  <Association Name="FK_Company_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="Address" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Address" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostID">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserID_Comment">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_ID">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="ProfilePhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Following_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Following" Type="Self.Following" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Following">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Following_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Following" Type="Self.Following" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Following">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Friend_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Friend">
+        <PropertyRef Name="User1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Friend_User2">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Friend">
+        <PropertyRef Name="User2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_ID">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserID">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Photo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_ProfilePhoto">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ProfilePhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_ID">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Followings" EntityType="Self.Following" />
+    <EntitySet Name="Friends" EntityType="Self.Friend" />
+    <EntitySet Name="Likes" EntityType="Self.Like" />
+    <EntitySet Name="Photos" EntityType="Self.Photo" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Company_Address" Association="Self.FK_Company_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Address" Association="Self.FK_User_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostID" Association="Self.FK_PostID">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserID_Comment" Association="Self.FK_UserID_Comment">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_ID" Association="Self.FK_Company_ID">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_Photo" Association="Self.FK_Company_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Following_Company" Association="Self.FK_Following_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Following" EntitySet="Followings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Following_User" Association="Self.FK_Following_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Following" EntitySet="Followings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Friend_User1" Association="Self.FK_Friend_User1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Friend" EntitySet="Friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Friend_User2" Association="Self.FK_Friend_User2">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Friend" EntitySet="Friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_ID" Association="Self.FK_Post_ID">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="Like" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Like" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Photo" Association="Self.FK_Post_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Photo" Association="Self.FK_User_Photo">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_ProfilePhoto" Association="Self.FK_User_ProfilePhoto">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_ID" Association="Self.FK_User_ID">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

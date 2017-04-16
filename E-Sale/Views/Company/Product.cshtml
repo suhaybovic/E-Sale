@@ -1,4 +1,4 @@
-﻿@model E_Sale.Models.Company
+﻿@model E_Sale.ViewModel.ProductViewModel
 
 <link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 
@@ -49,10 +49,66 @@
             </div>
 
             <div class="col-sm-9">
-                
+                @if (ViewBag.id == Model.ID)
+                { 
                 <div class="thumbnail">
-                  
+
+                 @using (Html.BeginForm("Product", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                 {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h3 style="margin-left:10px;">Product</h3>
+                            <hr />
+                            @Html.ValidationSummary(true)
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Description)
+                                    @Html.ValidationMessageFor(model => model.Description)
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Price)
+                                    @Html.ValidationMessageFor(model => model.Price)
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                    <label class="control-label col-md-2">Choose Image</label>
+
+                                <div class="col-md-10">
+                                    <label class="btn btn-default btn-file">
+                                        Browse <input type="file" name="image" style="display: none;">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
+                }
             </div>
         </div>
     </div>

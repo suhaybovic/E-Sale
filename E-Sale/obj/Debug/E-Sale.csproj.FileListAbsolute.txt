@@ -28,3 +28,7 @@ F:\Microsoft Apps\E-Sale\E-Sale\bin\EntityFramework.dll
 F:\Microsoft Apps\E-Sale\E-Sale\bin\EntityFramework.SqlServer.dll
 F:\Microsoft Apps\E-Sale\E-Sale\bin\EntityFramework.xml
 F:\Microsoft Apps\E-Sale\E-Sale\bin\EntityFramework.SqlServer.xml
+F:\Microsoft Apps\E-Sale\E-Sale\bin\BankLibrary.dll
+F:\Microsoft Apps\E-Sale\E-Sale\bin\DbCenter.dll
+F:\Microsoft Apps\E-Sale\E-Sale\bin\DbCenter.pdb
+F:\Microsoft Apps\E-Sale\E-Sale\bin\BankLibrary.pdb

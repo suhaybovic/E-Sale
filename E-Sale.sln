@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Sale", "E-Sale\E-Sale.csproj", "{62353C33-8652-4910-A895-BBC0F23B1311}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbCenter", "DbCenter\DbCenter.csproj", "{BF79BDED-0152-4D10-BE0E-63C0A0F5D8D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{62353C33-8652-4910-A895-BBC0F23B1311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62353C33-8652-4910-A895-BBC0F23B1311}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62353C33-8652-4910-A895-BBC0F23B1311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF79BDED-0152-4D10-BE0E-63C0A0F5D8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF79BDED-0152-4D10-BE0E-63C0A0F5D8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF79BDED-0152-4D10-BE0E-63C0A0F5D8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF79BDED-0152-4D10-BE0E-63C0A0F5D8D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,10 @@
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\DbCenter.dll.config
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\DbCenter.dll
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\DbCenter.pdb
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\EntityFramework.dll
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\EntityFramework.SqlServer.dll
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\EntityFramework.xml
+F:\Microsoft Apps\E-Sale\DbCenter\bin\Debug\EntityFramework.SqlServer.xml
+F:\Microsoft Apps\E-Sale\DbCenter\obj\Debug\DbCenter.dll
+F:\Microsoft Apps\E-Sale\DbCenter\obj\Debug\DbCenter.pdb
+F:\Microsoft Apps\E-Sale\DbCenter\obj\Debug\DbCenter.csprojResolveAssemblyReference.cache

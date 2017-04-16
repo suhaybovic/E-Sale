@@ -22,6 +22,6 @@ namespace DbCenter.ModelClasses
         public string Email { get; set; }
 
         public virtual Address Address { get; set; }
-
+        public virtual Photo Photo { get; set; }
     }
 }

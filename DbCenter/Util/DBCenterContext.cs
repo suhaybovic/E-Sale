@@ -14,6 +14,11 @@ namespace DbCenter.Util
         {
         }
         public DbSet<Address> Addresss { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Following> Followings { get; set; }
+        public DbSet<Friend> Friends { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }

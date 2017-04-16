@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelClasses\Comment.cs" />
+    <Compile Include="ModelClasses\Following.cs" />
+    <Compile Include="ModelClasses\Friend.cs" />
+    <Compile Include="ModelClasses\Like.cs" />
+    <Compile Include="ModelClasses\Post.cs" />
     <Compile Include="Util\DBCenterContext.cs" />
     <Compile Include="Util\Initializer.cs" />
     <Compile Include="ModelClasses\Address.cs" />

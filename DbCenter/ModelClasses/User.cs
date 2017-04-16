@@ -15,9 +15,15 @@ namespace DbCenter.ModelClasses
         public string Password { get; set; }
         public string email { get; set; }
         public Nullable<int> ProfilePhoto { get; set; }
-        public Nullable<int> Address { get; set; }
+        public Nullable<int> AddressID { get; set; }
 
-
-        public virtual Address Address1 { get; set; }
+        public virtual ICollection<Following> Followings { get; set; }
+        public virtual ICollection<Friend> Friends1 { get; set; }
+        public virtual ICollection<Friend> Friends2 { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
+        public virtual Photo Photo { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

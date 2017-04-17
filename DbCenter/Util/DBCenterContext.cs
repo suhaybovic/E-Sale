@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using DbCenter.ModelClasses;
 
+
 namespace DbCenter.Util
 {
-   public class DBCenterContext : DbContext
+   public class DBCenterContext : DbContext , IContext
     {
         public DBCenterContext(): base("DB")
         {
@@ -23,5 +24,16 @@ namespace DbCenter.Util
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        public T Add<T>(T entity) where T : class
+        {
+            return Set<T>().Add(entity);
+              
+        }
+
+        public int saveChanges()
+        {
+            return SaveChanges();
+        }
     }
 }

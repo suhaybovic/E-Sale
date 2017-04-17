@@ -1,4 +1,4 @@
-﻿@model E_Sale.ViewModel.SignUpViewModel
+﻿@model E_Sale.Models.Company
 @using E_Sale.ViewModel 
 
 
@@ -84,9 +84,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.field, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Field, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">    
-                            @Html.DropDownListFor(m => m.field, new SelectList(Enum.GetValues(typeof(Field))), new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Field, new SelectList(Enum.GetValues(typeof(Field))), new { @class = "form-control" })
                             
                         </div>
                     </div>

@@ -32,3 +32,5 @@ F:\Microsoft Apps\E-Sale\E-Sale\bin\BankLibrary.dll
 F:\Microsoft Apps\E-Sale\E-Sale\bin\DbCenter.dll
 F:\Microsoft Apps\E-Sale\E-Sale\bin\DbCenter.pdb
 F:\Microsoft Apps\E-Sale\E-Sale\bin\BankLibrary.pdb
+F:\Microsoft Apps\E-Sale\E-Sale\bin\AutoMapper.dll
+F:\Microsoft Apps\E-Sale\E-Sale\bin\AutoMapper.xml

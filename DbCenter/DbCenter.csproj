@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbCenterOtherModelFunctions\CompanyFunctions.cs" />
     <Compile Include="ModelClasses\Comment.cs" />
     <Compile Include="ModelClasses\Following.cs" />
     <Compile Include="ModelClasses\Friend.cs" />
     <Compile Include="ModelClasses\Like.cs" />
     <Compile Include="ModelClasses\Post.cs" />
     <Compile Include="Util\DBCenterContext.cs" />
+    <Compile Include="Util\IContext.cs" />
     <Compile Include="Util\Initializer.cs" />
     <Compile Include="ModelClasses\Address.cs" />
     <Compile Include="ModelClasses\Company.cs" />
@@ -64,6 +66,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

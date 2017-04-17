@@ -10,7 +10,6 @@ namespace E_Sale.Models
         public Company()
         {
         }
-
         public int ID { get; set; }
         public string Name { get; set; }
         public string Field { get; set; }
@@ -21,6 +20,7 @@ namespace E_Sale.Models
         public string Email { get; set; }
 
         public virtual Address Address { get; set; }
+        public virtual Photo Photo { get; set; }
 
     }
 }

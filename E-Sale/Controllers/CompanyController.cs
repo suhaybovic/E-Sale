@@ -36,25 +36,24 @@ namespace E_Sale.Controllers
 
         public ActionResult Product(int id)
         {
-            /*
-            var result = from s in ESaleContext.Companies
-                         where s.ID == id
-                         select s;
+            DbCenter.ModelClasses.Company company = ESaleContext.getCompanyByID(id);
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<DbCenter.ModelClasses.Company, Company>().ForMember(dst => dst.Address, src => src.Ignore()).
+                    ForMember(dst => dst.Photo, src => src.Ignore());
+            });
+            var companyDto = Mapper.Map<Company>(company);
 
-            if (!result.Any())
+            if (companyDto == null)
             {
                 return null;
             }
             else
             {
                 ProductViewModel ProductViewModel = new ProductViewModel();
-                ProductViewModel.ID = id;
-                ViewBag.id = id;
                 return View(ProductViewModel);
             }
-             * */
 
-            return null;
         }
 
         [HttpPost]

@@ -6,9 +6,9 @@
 </div>
 <br />
 <div class="thumbnail">
-    <ul class="nav nav-pills nav-stacked">
-        <li>@Html.ActionLink("Home", "Home", new { id = @Model.ID })</li>
-        <li>@Html.ActionLink("Product", "Product", new { id = @Model.ID })</li>
+    <ul id="sidenav" class="nav nav-pills nav-stacked">
+        <li>@Html.ActionLink("Home", "Home", new { id = @Model.Company.ID })</li>
+        <li>@Html.ActionLink("Product", "Product", new { id = @Model.Company.ID })</li>
         <li><a href="#section3">News</a></li>
         <li><a href="#section3">Follwers</a></li>
     </ul>

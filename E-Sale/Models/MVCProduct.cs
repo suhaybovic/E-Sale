@@ -5,7 +5,7 @@ using System.Web;
 
 namespace E_Sale.Models
 {
-    public class Product
+    public class MVCProduct
     {
 
         public int ID { get; set; }
@@ -15,7 +15,7 @@ namespace E_Sale.Models
         public Nullable<double> Price { get; set; }
         public Nullable<int> PhotoID { get; set; }
 
-        public virtual Company Company { get; set; }
-        public virtual Photo Photo { get; set; }
+        public virtual MVCCompany Company { get; set; }
+        public virtual MVCPhoto Photo { get; set; }
     }
 }

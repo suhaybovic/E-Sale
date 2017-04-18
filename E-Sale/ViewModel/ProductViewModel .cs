@@ -9,9 +9,13 @@ namespace E_Sale.ViewModel
 {
     public class ProductViewModel
     {
+        public MVCCompany Company { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+
+
+        public virtual List<MVCProduct> Products { get; set; }
     }
 
 }

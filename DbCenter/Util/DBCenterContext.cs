@@ -35,5 +35,15 @@ namespace DbCenter.Util
         {
             return SaveChanges();
         }
+
+        public Company getCompanyByID(int id)
+        {
+            return Companies.Find(id);
+        }
+
+        public List<Product> getProductsForCompany(int id)
+        {
+            return Products.Where(s => s.CompanyID == id).ToList();
+        }
     }
 }

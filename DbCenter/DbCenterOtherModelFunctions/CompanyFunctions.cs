@@ -11,14 +11,7 @@ namespace DbCenter.DbCenterOtherModelFunctions
     {
         DBCenterContext context = new DBCenterContext();
 
-        public Company getCompanyByID(int id)
-        {
-            var result = from s in context.Companies
-                         where s.ID == id
-                         select s;
-
-            return result.First();
-        }
+       
         public List<Company> LoginCompany(Company company)
         {
             var result = from s in context.Companies

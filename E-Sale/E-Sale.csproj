@@ -134,12 +134,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\MVCAddress.cs" />
+    <Compile Include="Models\MVCCompany.cs" />
     <Compile Include="Models\ESaleContext.cs" />
-    <Compile Include="Models\Photo.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ContextMapper.cs" />
+    <Compile Include="Models\MVCPhoto.cs" />
+    <Compile Include="Models\MVCProduct.cs" />
+    <Compile Include="Models\MVCUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Field.cs" />
     <Compile Include="ViewModel\ProductViewModel .cs" />

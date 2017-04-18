@@ -5,12 +5,12 @@ using System.Web;
 
 namespace E_Sale.Models
 {
-    public class Address
+    public class MVCAddress
     {
-        public Address()
+        public MVCAddress()
         {
-            this.Companies = new HashSet<Company>();
-            this.Users = new HashSet<User>();
+            this.Companies = new HashSet<MVCCompany>();
+            this.Users = new HashSet<MVCUser>();
         }
     
         public int ID { get; set; }
@@ -19,7 +19,7 @@ namespace E_Sale.Models
         public string Street { get; set; }
 
 
-        public virtual ICollection<Company> Companies { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<MVCCompany> Companies { get; set; }
+        public virtual ICollection<MVCUser> Users { get; set; }
     }
 }

@@ -5,9 +5,9 @@ using System.Web;
 
 namespace E_Sale.Models
 {
-    public class Company
+    public class MVCCompany
     {
-        public Company()
+        public MVCCompany()
         {
         }
         public int ID { get; set; }
@@ -19,8 +19,8 @@ namespace E_Sale.Models
         public string Status { get; set; }
         public string Email { get; set; }
 
-        public virtual Address Address { get; set; }
-        public virtual Photo Photo { get; set; }
+        public virtual MVCAddress Address { get; set; }
+        public virtual MVCPhoto Photo { get; set; }
 
     }
 }

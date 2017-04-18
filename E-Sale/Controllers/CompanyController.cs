@@ -18,10 +18,10 @@ namespace E_Sale.Controllers
             DbCenter.ModelClasses.Company company = ESaleContext.getCompanyByID(id);
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<DbCenter.ModelClasses.Company, Company>().ForMember(dst => dst.Address, src => src.Ignore()).
+                cfg.CreateMap<DbCenter.ModelClasses.Company, MVCCompany>().ForMember(dst => dst.Address, src => src.Ignore()).
                     ForMember(dst => dst.Photo, src => src.Ignore());
             });
-            var companyDto = Mapper.Map<Company>(company);
+            var companyDto = Mapper.Map<MVCCompany>(company);
 
 
             if (companyDto == null)
@@ -37,12 +37,8 @@ namespace E_Sale.Controllers
         public ActionResult Product(int id)
         {
             DbCenter.ModelClasses.Company company = ESaleContext.getCompanyByID(id);
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<DbCenter.ModelClasses.Company, Company>().ForMember(dst => dst.Address, src => src.Ignore()).
-                    ForMember(dst => dst.Photo, src => src.Ignore());
-            });
-            var companyDto = Mapper.Map<Company>(company);
+
+            var companyDto = ContextMapper.MaptoMVCCompany(company);
 
             if (companyDto == null)
             {
@@ -50,7 +46,14 @@ namespace E_Sale.Controllers
             }
             else
             {
+                if (Session["CompanyID"] == null)
+                    ViewBag.id = null;
+                else
+                    ViewBag.id = (int)Session["CompanyID"];
                 ProductViewModel ProductViewModel = new ProductViewModel();
+                ProductViewModel.Company = companyDto;
+                var t = ESaleContext.getProductsForCompany(id);
+                ProductViewModel.Products = ContextMapper.MaptoMVCProductList(t);
                 return View(ProductViewModel);
             }
 
@@ -62,21 +65,24 @@ namespace E_Sale.Controllers
             string path = Path.Combine(Server.MapPath("~/assets/Uploaded_photos"),Path.GetFileName(image.FileName));
             image.SaveAs(path);
 
-            Photo photo = new Photo();
+            DbCenter.ModelClasses.Photo photo = new DbCenter.ModelClasses.Photo();
             photo.URL = "assets/Uploaded_photos/"+image.FileName;
-           // ESaleContext.Photos.Add(photo);
-            ESaleContext.SaveChanges();
-            var photoid = photo.ID;
+            var photoreturned = ESaleContext.AddPhoto(photo);
+            
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<ProductViewModel, DbCenter.ModelClasses.Product>()
+                .ForMember(dst => dst.Company, src => src.Ignore());
+            });
+            var product = Mapper.Map<DbCenter.ModelClasses.Product>(ProductViewModel);
 
-            Product product = new Product();
             product.CompanyID = (int)Session["CompanyID"];
-            product.Name = ProductViewModel.Name;
-            product.Price = ProductViewModel.Price;
-            product.Description = ProductViewModel.Description;
-            product.PhotoID = photoid;
-            product.Photo = photo;
-            //ESaleContext.Products.Add(product);
-            ESaleContext.SaveChanges();
+            //product.Company = ESaleContext.getCompanyByID((int)Session["CompanyID"]);
+            product.PhotoID = photoreturned.ID;
+            //product.Photo = photo;
+
+            ESaleContext.AddProduct(product);
+
 
             return RedirectToAction("Product");
         }
@@ -84,19 +90,14 @@ namespace E_Sale.Controllers
 
         public ActionResult Login()
         {
-            Company viewmodel = new Company();
+            MVCCompany viewmodel = new MVCCompany();
             return View(viewmodel);
         }
 
         [HttpPost]
-        public ActionResult Login(Company company)
+        public ActionResult Login(MVCCompany company)
         {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Company, DbCenter.ModelClasses.Company>().ForMember(dst => dst.Address, src => src.Ignore()).
-                    ForMember(dst => dst.Photo, src => src.Ignore());
-            });
-            var companyDto = Mapper.Map<DbCenter.ModelClasses.Company>(company);
+            var companyDto = ContextMapper.MaptoDbcenterCompany(company);
             var result = ESaleContext.LoginCompany(companyDto);
 
             if (!result.Any())
@@ -114,24 +115,17 @@ namespace E_Sale.Controllers
 
         public ActionResult SignUp()
         {
-            Company viewmodel = new Company();
+            MVCCompany viewmodel = new MVCCompany();
             return View(viewmodel);
         }
 
         [HttpPost]
-        public ActionResult SignUp(Company company)
+        public ActionResult SignUp(MVCCompany company)
         {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Company, DbCenter.ModelClasses.Company>().ForMember(dst => dst.Address, src => src.Ignore()).
-                    ForMember(dst => dst.Photo, src => src.Ignore());
-            });
-            var companyDto = Mapper.Map<DbCenter.ModelClasses.Company>(company);
-
+            var companyDto = ContextMapper.MaptoDbcenterCompany(company);
             ESaleContext.AddCompany(companyDto);
             ESaleContext.SaveChanges();
-
-            return View();
+            return RedirectToAction("Index","Home");
         }
 	}
 }

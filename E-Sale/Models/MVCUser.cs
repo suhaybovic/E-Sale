@@ -5,7 +5,7 @@ using System.Web;
 
 namespace E_Sale.Models
 {
-    public class User
+    public class MVCUser
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
@@ -14,9 +14,9 @@ namespace E_Sale.Models
         public string Password { get; set; }
         public string email { get; set; }
         public Nullable<int> ProfilePhoto { get; set; }
-        public Nullable<int> Address { get; set; }
+        public Nullable<int> AddressID { get; set; }
 
 
-        public virtual Address Address1 { get; set; }
+        public virtual MVCAddress Address { get; set; }
     }
 }

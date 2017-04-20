@@ -1,0 +1,242 @@
+﻿@model E_Sale.ViewModel.NewsViewModel
+
+<link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+
+<style>
+    body {
+        background-image: url(../../assets/images/pw_maze_white.png);
+        background-repeat: repeat;
+    }
+
+    .thumbnail {
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    footer {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+    }
+
+    .container {
+        margin-right: 25px;
+        margin-left: 25px;
+    }
+
+    .content {
+        margin-top: 15px;
+    }
+
+    #prof {
+        margin-top: 10px;
+        width: 100px;
+        height: 100px;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    .page-header1 {
+        margin-top: 0px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .thumb {
+        max-height: 200px;
+    }
+
+    #blah
+    {
+        max-height : 100px;
+        max-width : 100px;
+        margin-left : 20px;
+    }
+</style>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-md-3">
+                @Html.Partial("_Company_Sidenav")
+            </div>
+
+            <div class="col-md-9">
+                @if (ViewBag.id == Model.Company.ID && ViewBag.Type == "Company")
+                {
+                    <div class="thumbnail">
+
+                        @using (Html.BeginForm("News", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                <div class="col-md-12" style="margin-top:10px; margin-left:10px; margin-right:10px;">
+                                    <div class="page-header1">
+                                        Add new Post
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                @Html.ValidationSummary(true)
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Text, new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.Text, new { @class = "form-control col-md-12", style = "resize: none; min-width:100%; box-sizing: border-box;" })
+                                        @Html.ValidationMessageFor(model => model.Text)
+                                    </div>
+                                </div>
+
+                              
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Choose Image</label>
+
+                                    <div class="col-md-10">
+                                        <label class="btn btn-default btn-file">
+                                            Browse <input type="file" id="file-upload" name="image" style="display: none;">
+                                        </label>
+
+
+                                        <img id="blah" src="#" style="display:none;">
+                                    </div>
+                                </div>
+
+
+
+                                <script>
+
+                                    function readURL(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $("#blah").css("display", "inline");
+                                                $('#blah').attr('src', e.target.result);
+                                            }
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+
+                                    $("#file-upload").change(function () {
+                                        readURL(this);
+                                    });
+
+                                </script>
+
+
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                <br />
+                <div class="thumbnail">
+
+                    <div class="col-md-12" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+                        <div class="page-header1">
+                            News
+                        </div>
+                    </div>
+                    <hr />
+                    @foreach (var item in Model.Posts)
+                    {
+                        
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-md-12">
+                                <div class="well">
+                                    <p>@item.Text</p>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input id="inputtext" type="text" style="min-width:100%;" class="form-control" placeholder="Add Comment"> 
+                                </div>
+                            </div>
+                        <div id="LikeSection" class="row" style="margin-top:10px;">
+                            <div class="col-md-6">
+                           
+                                <button id="@(item.ID)l" class="btn btn-default" onclick="docNumberTextChanged(@item.ID)">Like</button>
+                                <button type="button" class="btn btn-default">Comment</button>
+                            </div>
+                        </div>
+                           <hr />
+                        
+                        <script>
+                            var res = @item.ID;
+                            var data = { id: res };
+                            var url = '@Url.Action("CheckLike", "Post")';
+                            $.ajax({
+                                url: url,
+                                data: data,
+                                method: "POST",
+                                success: function (result)
+                                {
+                                    $('#' + res + 'l').css("background-color", "red");
+                                },
+                                error: function (jqXHR, exception) {
+                                    return true;
+                                }
+                                ,
+                                complete: function (result) {
+                                    return true;
+                                }
+
+                            });
+                        </script>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+        $('#sidenav li:nth-child(3)').addClass("active");
+
+
+        function docNumberTextChanged(x)
+        {
+            var value = x;
+            var data = { id: value };
+          
+                var url = '@Url.Action("Like", "Post")';
+                $.ajax({
+                    url: url,
+                    data: data,
+                    method:"POST",
+                    success: function (result)
+                    {
+                        $('#'+x+'l').css("background-color","red");
+                    },
+                    error: function (jqXHR, exception)
+                    {
+                        console.log("error");
+                    }
+                });
+            
+        }
+
+    </script>
+
+
+</body>

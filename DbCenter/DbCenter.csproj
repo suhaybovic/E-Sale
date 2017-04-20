@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbCenterOtherModelFunctions\CompanyFunctions.cs" />
+    <Compile Include="DbCenterOtherModelFunctions\UserFunctions.cs" />
     <Compile Include="ModelClasses\Comment.cs" />
     <Compile Include="ModelClasses\Following.cs" />
     <Compile Include="ModelClasses\Friend.cs" />

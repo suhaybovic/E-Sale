@@ -45,5 +45,10 @@ namespace DbCenter.Util
         {
             return Products.Where(s => s.CompanyID == id).ToList();
         }
+        public List<Post> getPostsForCompany(int id)
+        {
+            return Posts.Where(s => s.CompanyID == id).ToList();
+        }
+       
     }
 }

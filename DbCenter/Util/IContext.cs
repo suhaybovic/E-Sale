@@ -11,6 +11,7 @@ namespace DbCenter.Util
         T Add<T>(T entity) where T : class;
         Company getCompanyByID(int id);
         List<Product> getProductsForCompany(int id);
+        List<Post> getPostsForCompany(int id);
         int saveChanges();
     }
 }

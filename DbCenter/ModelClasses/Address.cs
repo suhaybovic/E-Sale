@@ -8,12 +8,6 @@ namespace DbCenter.ModelClasses
 {
     public class Address
     {
-        public Address()
-        {
-            this.Companies = new HashSet<Company>();
-            this.Users = new HashSet<User>();
-        }
-
         public int ID { get; set; }
         public string Country { get; set; }
         public string Area { get; set; }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace DbCenter.ModelClasses
+namespace E_Sale.Models
 {
-    public class Post
+    public class MVCPost
     {
         public int ID { get; set; }
         public Nullable<int> UserID { get; set; }
@@ -15,8 +14,8 @@ namespace DbCenter.ModelClasses
         public Nullable<int> PhotoID { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
 
-        public virtual Company Company { get; set; }
-        public virtual Photo Photo { get; set; }
-        public virtual User User { get; set; }
+        public virtual MVCCompany Company { get; set; }
+        public virtual MVCPhoto Photo { get; set; }
+        public virtual MVCUser User { get; set; }
     }
 }

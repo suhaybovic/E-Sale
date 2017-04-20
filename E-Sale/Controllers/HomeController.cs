@@ -13,7 +13,14 @@ namespace E_Sale.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Session["Type"] == null)
+            { 
+                return View("Start");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
         
 

@@ -16,6 +16,19 @@ namespace E_Sale.Models
             });
             return Mapper.Map<DbCenter.ModelClasses.Photo>(photo);
         }
+
+        public static DbCenter.ModelClasses.User MaptoDbcenterUser(Models.MVCUser user)
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Models.MVCUser, DbCenter.ModelClasses.User>()
+                    .ForMember(dst => dst.Address, src => src.Ignore())
+                    .ForMember(dst => dst.Photo, src => src.Ignore());
+            });
+            return Mapper.Map<DbCenter.ModelClasses.User>(user);
+        }
+
+
         public static  DbCenter.ModelClasses.Company MaptoDbcenterCompany(Models.MVCCompany company)
         {
             Mapper.Initialize(cfg =>
@@ -50,6 +63,25 @@ namespace E_Sale.Models
             });
 
             return Mapper.Map<List<DbCenter.ModelClasses.Product>, List<Models.MVCProduct>>(list);
+
+        }
+
+
+
+
+        public static List<Models.MVCPost> MaptoMVCPostList(List<DbCenter.ModelClasses.Post> list)
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<DbCenter.ModelClasses.Photo, Models.MVCPhoto>();
+                cfg.CreateMap<DbCenter.ModelClasses.Address, Models.MVCAddress>();
+                cfg.CreateMap<DbCenter.ModelClasses.Comment, Models.MVCComment>();
+                cfg.CreateMap<DbCenter.ModelClasses.Like, Models.MVCLike>();
+                cfg.CreateMap<DbCenter.ModelClasses.User, Models.MVCUser>();
+                cfg.CreateMap<DbCenter.ModelClasses.Company, Models.MVCCompany>();
+                cfg.CreateMap<DbCenter.ModelClasses.Post, Models.MVCPost>();
+            });
+            return Mapper.Map<List<DbCenter.ModelClasses.Post>, List<Models.MVCPost>>(list);
 
         }
 

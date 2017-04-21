@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using E_Sale.Models;
+using AutoMapper;
+
 namespace E_Sale.Controllers
 {
     public class UserController : Controller
@@ -18,7 +20,8 @@ namespace E_Sale.Controllers
         [HttpPost]
         public ActionResult SignUp(MVCUser User)
         {
-            var userDto = ContextMapper.MaptoDbcenterUser(User);
+            DbCenter.ModelClasses.User userDto = null;
+            Mapper.Map(User, userDto);
             ESaleContext.AddUser(userDto);
             ESaleContext.SaveChanges();
             return RedirectToAction("Index", "Home");
@@ -34,7 +37,7 @@ namespace E_Sale.Controllers
         [HttpPost]
         public ActionResult Login(MVCUser user)
         {
-            var userDto = ContextMapper.MaptoDbcenterUser(user);
+            DbCenter.ModelClasses.User userDto = Mapper.Map<DbCenter.ModelClasses.User>(user);
             var result = ESaleContext.LoginUser(userDto);
 
             if (!result.Any())

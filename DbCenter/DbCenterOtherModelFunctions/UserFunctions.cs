@@ -15,11 +15,14 @@ namespace DbCenter.DbCenterOtherModelFunctions
 
         public List<User> LoginUser(User user)
         {
-            var result = from s in context.Users
+                var things = from s in context.Users
                          where s.Email.Equals(user.Email, StringComparison.OrdinalIgnoreCase)
                          where s.Password == user.Password
                          select s;
-            return result.ToList();
+
+                return things.ToList();
+           
+            
         }
     }
 }

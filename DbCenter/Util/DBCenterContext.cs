@@ -13,6 +13,7 @@ namespace DbCenter.Util
     {
         public DBCenterContext(): base("DB")
         {
+
         }
         public DbSet<Address> Addresss { get; set; }
         public DbSet<Comment> Comments { get; set; }

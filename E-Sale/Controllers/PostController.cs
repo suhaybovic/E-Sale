@@ -23,6 +23,19 @@ namespace E_Sale.Controllers
             return new HttpStatusCodeResult(200);
         } 
 
+         [HttpPost]
+        public ActionResult Comment(int id,string text)
+        {
+            DbCenter.ModelClasses.Comment comment = new DbCenter.ModelClasses.Comment();
+            comment.PostID = id;
+            comment.UserID = (int)Session["UserID"];
+            comment.Text = text;
+            comment.CreationDate = DateTime.Now;
+            context.Comments.Add(comment);
+            context.SaveChanges();
+            return new HttpStatusCodeResult(200);
+        } 
+        
 
         [HttpPost]
         public ActionResult CheckLike(int id)

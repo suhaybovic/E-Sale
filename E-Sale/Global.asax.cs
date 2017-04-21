@@ -8,6 +8,7 @@ using System.Web.Routing;
 using E_Sale.Models;
 using System.Data.Entity;
 using DbCenter.Util;
+
 namespace E_Sale
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -23,6 +24,7 @@ namespace E_Sale
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            E_Sale.AutoMapper.AutoMapperApplication.AutoMapper();
         }
     }
 }

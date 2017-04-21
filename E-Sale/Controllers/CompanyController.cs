@@ -7,6 +7,7 @@ using E_Sale.Models;
 using E_Sale.ViewModel;
 using System.IO;
 using AutoMapper;
+using DbCenter.ModelClasses;
 namespace E_Sale.Controllers
 {
     public class CompanyController : Controller
@@ -15,12 +16,7 @@ namespace E_Sale.Controllers
 
         public ActionResult Home(int id)
         {
-            DbCenter.ModelClasses.Company company = ESaleContext.getCompanyByID(id);
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<DbCenter.ModelClasses.Company, MVCCompany>().ForMember(dst => dst.Address, src => src.Ignore()).
-                    ForMember(dst => dst.Photo, src => src.Ignore());
-            });
+            Company company = ESaleContext.getCompanyByID(id);
             var companyDto = Mapper.Map<MVCCompany>(company);
 
 
@@ -36,10 +32,8 @@ namespace E_Sale.Controllers
 
         public ActionResult News(int id)
         {
-            DbCenter.ModelClasses.Company company = ESaleContext.getCompanyByID(id);
-
-            var companyDto = ContextMapper.MaptoMVCCompany(company);
-
+            Company company = ESaleContext.getCompanyByID(id);
+            var companyDto = Mapper.Map<MVCCompany>(company);
             if (companyDto == null)
             {
                 return null;
@@ -56,7 +50,8 @@ namespace E_Sale.Controllers
                 NewsViewModel NewsViewModel = new NewsViewModel();
                 NewsViewModel.Company = companyDto;
                 var t = ESaleContext.getPostsForCompany(id);
-                NewsViewModel.Posts = ContextMapper.MaptoMVCPostList(t);
+
+                NewsViewModel.Posts = Mapper.Map<List<MVCPost>>(t);
 
                 return View(NewsViewModel);
             }
@@ -86,7 +81,6 @@ namespace E_Sale.Controllers
             var post = Mapper.Map<DbCenter.ModelClasses.Post>(NewsViewModel);
 
             post.CompanyID = (int)Session["CompanyID"];
-            post.Company = ESaleContext.getCompanyByID((int)Session["CompanyID"]);
             if (image != null)
                 post.PhotoID = photoreturned.ID;
             else
@@ -96,14 +90,13 @@ namespace E_Sale.Controllers
             ESaleContext.AddPost(post);
 
 
-            return RedirectToAction("News");
+            return RedirectToAction("News", new { id = post.CompanyID });
         }
 
         public ActionResult Product(int id)
         {
-            DbCenter.ModelClasses.Company company = ESaleContext.getCompanyByID(id);
-
-            var companyDto = ContextMapper.MaptoMVCCompany(company);
+            Company company = ESaleContext.getCompanyByID(id);
+            var companyDto = Mapper.Map<MVCCompany>(company);
 
             if (companyDto == null)
             {
@@ -118,7 +111,8 @@ namespace E_Sale.Controllers
                 ProductViewModel ProductViewModel = new ProductViewModel();
                 ProductViewModel.Company = companyDto;
                 var t = ESaleContext.getProductsForCompany(id);
-                ProductViewModel.Products = ContextMapper.MaptoMVCProductList(t);
+
+                ProductViewModel.Products = Mapper.Map <List<MVCProduct>>(t);
                 return View(ProductViewModel);
             }
 
@@ -136,8 +130,7 @@ namespace E_Sale.Controllers
             
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<ProductViewModel, DbCenter.ModelClasses.Product>()
-                .ForMember(dst => dst.Company, src => src.Ignore());
+                cfg.CreateMap<ProductViewModel, DbCenter.ModelClasses.Product>();
             });
             var product = Mapper.Map<DbCenter.ModelClasses.Product>(ProductViewModel);
 
@@ -158,7 +151,7 @@ namespace E_Sale.Controllers
         [HttpPost]
         public ActionResult Login(MVCCompany company)
         {
-            var companyDto = ContextMapper.MaptoDbcenterCompany(company);
+            var companyDto = Mapper.Map<Company>(company);
             var result = ESaleContext.LoginCompany(companyDto);
 
             if (!result.Any())
@@ -184,7 +177,7 @@ namespace E_Sale.Controllers
         [HttpPost]
         public ActionResult SignUp(MVCCompany company)
         {
-            var companyDto = ContextMapper.MaptoDbcenterCompany(company);
+            var companyDto = Mapper.Map<Company>(company);
             ESaleContext.AddCompany(companyDto);
             ESaleContext.SaveChanges();
             return RedirectToAction("Index","Home");

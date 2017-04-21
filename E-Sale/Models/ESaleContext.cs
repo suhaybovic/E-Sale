@@ -55,7 +55,6 @@ namespace E_Sale.Models
         
         public DbCenter.ModelClasses.Company getCompanyByID(int id)
         {
-            CompanyFunctions CompanyFunctions = new CompanyFunctions();
             return context.getCompanyByID(id);
         }
         public List<DbCenter.ModelClasses.Product> getProductsForCompany(int id)

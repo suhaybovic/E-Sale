@@ -8,7 +8,7 @@ namespace DbCenter.ModelClasses
 {
     public class Comment
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<int> PostID { get; set; }
         public string Text { get; set; }

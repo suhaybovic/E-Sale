@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AutoMapper\AutoMapperApplication.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
@@ -141,7 +142,6 @@
     <Compile Include="Models\MVCComment.cs" />
     <Compile Include="Models\MVCCompany.cs" />
     <Compile Include="Models\ESaleContext.cs" />
-    <Compile Include="Models\ContextMapper.cs" />
     <Compile Include="Models\MVCLike.cs" />
     <Compile Include="Models\MVCPhoto.cs" />
     <Compile Include="Models\MVCPost.cs" />

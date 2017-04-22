@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using DbCenter.ModelClasses;
 using DbCenter.Util;
 using DbCenter.DbCenterOtherModelFunctions;
 namespace E_Sale.Models
@@ -13,59 +14,91 @@ namespace E_Sale.Models
         public ESaleContext() : base("DB")
         {
         }
-       
-        public void AddCompany(DbCenter.ModelClasses.Company company)
+
+        public void AddFollowing(Following following)
+        {
+            context.Add(following);
+            context.saveChanges();
+        }
+
+        public void AddCompany(Company company)
         {
             context.Add(company);
             context.saveChanges();
         }
-        public DbCenter.ModelClasses.Photo AddPhoto(DbCenter.ModelClasses.Photo photo)
+        public DbCenter.ModelClasses.Photo AddPhoto(Photo photo)
         {
             var temp = context.Add(photo);
             context.saveChanges();
             return temp;
         }
-        public void AddProduct(DbCenter.ModelClasses.Product product)
+        public void AddProduct(Product product)
         {
             context.Add(product);
             context.saveChanges();
         }
-        public void AddUser(DbCenter.ModelClasses.User user)
+        public void AddUser(User user)
         {
             context.Add(user);
             context.saveChanges();
         }
-        public void AddPost(DbCenter.ModelClasses.Post post)
+        public void AddPost(Post post)
         {
             context.Add(post);
             context.saveChanges();
         }
-        public List<DbCenter.ModelClasses.Company> LoginCompany(DbCenter.ModelClasses.Company company)
+        public List<Company> LoginCompany(Company company)
         {
             CompanyFunctions CompanyFunctions = new CompanyFunctions();
             return CompanyFunctions.LoginCompany(company);
         }
 
-        public List<DbCenter.ModelClasses.User> LoginUser(DbCenter.ModelClasses.User user)
+        public List<User> LoginUser(User user)
         {
             UserFunctions userFunctions = new UserFunctions();
             return userFunctions.LoginUser(user);
         }
 
-        
-        public DbCenter.ModelClasses.Company getCompanyByID(int id)
+        public User getUserByID(int id)
+        {
+            return context.getUserByID(id);
+        }
+
+        public Company getCompanyByID(int id)
         {
             return context.getCompanyByID(id);
         }
-        public List<DbCenter.ModelClasses.Product> getProductsForCompany(int id)
+
+        public List<Product> getProductsForCompany(int id)
         {
             return context.getProductsForCompany(id);
         }
         
-        public List<DbCenter.ModelClasses.Post> getPostsForCompany(int id)
+        public List<Post> getPostsForCompany(int id)
         {
             return context.getPostsForCompany(id);
         }
+        public List<Post> getHomeposts(int id)
+        {
+            UserFunctions userFunctions = new UserFunctions();
+            return userFunctions.getHomeposts(id);
+        }
+        public List<Company> getFollowedCompanies(int id)
+        {
+            
+            UserFunctions userFunctions = new UserFunctions();
+            return userFunctions.getFollowedCompanies(id);
+            
+        }
+        
+        public List<Following> CheckFollowing(int Companyid, int userid)
+        {
+            UserFunctions userFunctions = new UserFunctions();
+            return userFunctions.CheckFollowing(Companyid,userid);
+        }
+
+        
+        
         
         
     }

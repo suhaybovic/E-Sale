@@ -36,6 +36,11 @@ namespace DbCenter.Util
         {
             return SaveChanges();
         }
+        public User getUserByID(int id)
+        {
+            return Users.Find(id);
+        }
+        
 
         public Company getCompanyByID(int id)
         {

@@ -24,7 +24,7 @@ namespace E_Sale
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            E_Sale.AutoMapper.AutoMapperApplication.AutoMapper();
+            E_Sale.AutoMapper.AutoMapperApplication.AutoMapperinit();
         }
     }
 }

@@ -13,12 +13,11 @@ namespace E_Sale.Controllers
     public class CompanyController : Controller
     {
         ESaleContext ESaleContext = new ESaleContext();
-
+        
         public ActionResult Home(int id)
         {
             Company company = ESaleContext.getCompanyByID(id);
             var companyDto = Mapper.Map<MVCCompany>(company);
-
 
             if (companyDto == null)
              {
@@ -26,20 +25,24 @@ namespace E_Sale.Controllers
              }
              else
              {
-                 return View(companyDto);
+                CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
+                companyHomeViewModel.Company = companyDto;
+                return View(companyHomeViewModel);
              }
         }
 
         public ActionResult News(int id)
         {
             Company company = ESaleContext.getCompanyByID(id);
-            var companyDto = Mapper.Map<MVCCompany>(company);
-            if (companyDto == null)
+
+            if (company == null)
             {
                 return null;
             }
             else
             {
+                MVCCompany companyDto = new MVCCompany();
+                Mapper.Map(company, companyDto);
                 if (Session["CompanyID"] == null)
                     ViewBag.id = null;
                 else

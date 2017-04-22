@@ -1,8 +1,69 @@
 ﻿<div class="thumbnail">
     <img id="prof" src="https://placehold.it/350x150" class="img-circle text-center" alt="...">
     <div class="text-center">
-        <h4 id="Username">@Model.Company.Name</h4>
+        <h4>@Model.Company.Name</h4>
     </div>
+    @if (Session["Type"] == "User")
+    {
+        
+    <div class="text-center">
+        <button id="Follow-div" class="btn btn-default" onclick="Follow(@Model.Company.ID)">Follow &nbsp<span class="glyphicon glyphicon-hand-right"></span></button>
+    </div>
+        
+         <script>
+                var res = @Model.Company.ID;
+                var data = { id: res };
+                var url = '@Url.Action("CheckFollowing", "User")';
+                $.ajax({
+                    url: url,
+                    data: data,
+                    method: "POST",
+                    success: function (result)
+                    {
+                        document.getElementById('Follow-div').style.backgroundColor = "limegreen";
+                        document.getElementById('Follow-div').innerHTML= "Following &nbsp<span class='glyphicon glyphicon-ok'>";
+                    },
+                    error: function (jqXHR, exception) 
+                    {
+                        console.log("errror");
+                    }
+                    ,
+                    complete: function (result) {
+                        return true;
+                    }
+
+                });
+                        </script>
+        
+        
+        
+    <script>
+
+        function Follow(x) {
+            var value = x;
+            var data = { id: value};
+
+            var url = '@Url.Action("FollowCompany", "User")';
+
+            $.ajax({
+                url: url,
+                data: data,
+                method: "POST",
+                success: function (result) 
+                {
+                    document.getElementById('Follow-div').style.backgroundColor = "limegreen";
+                    document.getElementById('Follow-div').innerHTML= "Following &nbsp<span class='glyphicon glyphicon-ok'>";
+                },
+                error: function (jqXHR, exception) {
+                    console.log("error");
+                }
+            });
+
+        }
+
+
+    </script>
+    }
 </div>
 <br />
 <div class="thumbnail">
@@ -13,3 +74,4 @@
         <li><a href="#section3">Follwers</a></li>
     </ul>
 </div>
+

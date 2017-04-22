@@ -8,10 +8,9 @@ using DbCenter.ModelClasses;
 
 namespace E_Sale.AutoMapper
 {
-    public static class AutoMapperApplication
+    public static class AutoMapperApplication 
     {
-
-        public static void AutoMapper()
+        public static void AutoMapperinit()
         {
             Mapper.Initialize(cfg =>
             {
@@ -25,7 +24,7 @@ namespace E_Sale.AutoMapper
                 cfg.CreateMap<Models.MVCUser, DbCenter.ModelClasses.User>();
 
 
-                cfg.CreateMap<DbCenter.ModelClasses.Company, Models.MVCCompany>().
+                cfg.CreateMap<DbCenter.ModelClasses.Company, Models.MVCCompany>();
                 cfg.CreateMap<Models.MVCCompany, DbCenter.ModelClasses.Company>();
 
 
@@ -48,6 +47,8 @@ namespace E_Sale.AutoMapper
                 cfg.CreateMap<DbCenter.ModelClasses.Product, Models.MVCProduct>();
                 cfg.CreateMap<Models.MVCProduct, DbCenter.ModelClasses.Product>();
 
+                cfg.CreateMap<DbCenter.ModelClasses.Following, Models.MVCFollowing>();
+                cfg.CreateMap<Models.MVCFollowing, DbCenter.ModelClasses.Following>();
 
             });
            

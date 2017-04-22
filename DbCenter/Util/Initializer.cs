@@ -12,10 +12,13 @@ namespace DbCenter.Util
         protected override void Seed(DBCenterContext context)
         {
             base.Seed(context);
+
             DbCenter.ModelClasses.Company c = new ModelClasses.Company();
             c.Email = "Suhaybovic@gmail.com";
             c.Password = "123456";
             context.Companies.Add(c);
+
+
             context.saveChanges();
         }
     }

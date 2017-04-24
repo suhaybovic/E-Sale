@@ -10,6 +10,7 @@ namespace E_Sale.ViewModel
     {
         public virtual MVCUser user { get; set; }
         public virtual List<MVCPost> Posts { get; set; }
+        public string Text { get; set; }
         public virtual List<MVCCompany> FollowedCompanies { get; set; }
         public virtual List<MVCPost> FollowedCompaniesPosts { get; set; }
     }

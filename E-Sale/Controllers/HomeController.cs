@@ -18,7 +18,7 @@ namespace E_Sale.Controllers
             { 
                 return View("Start");
             }
-            else
+            else if (Session["CompanyID"] == null)
             {
                 HomeViewModel homeViewModel = new HomeViewModel();
 
@@ -35,6 +35,9 @@ namespace E_Sale.Controllers
                 return View("Index", homeViewModel);
 
             }
+            else
+                return View("IndexCompany");
+          
         }
         
 

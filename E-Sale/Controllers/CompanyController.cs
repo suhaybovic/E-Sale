@@ -133,7 +133,10 @@ namespace E_Sale.Controllers
             
             Mapper.Initialize(cfg =>
             {
+                cfg.CreateMap<DbCenter.ModelClasses.Company, Models.MVCCompany>();
+                cfg.CreateMap<Models.MVCCompany, DbCenter.ModelClasses.Company>();
                 cfg.CreateMap<ProductViewModel, DbCenter.ModelClasses.Product>();
+
             });
             var product = Mapper.Map<DbCenter.ModelClasses.Product>(ProductViewModel);
 
@@ -159,7 +162,8 @@ namespace E_Sale.Controllers
 
             if (!result.Any())
             {
-                return RedirectToAction("Index");
+                @ViewBag.errorMessage = "Email And Password not matched !";
+                return View();
             }
             else
             {

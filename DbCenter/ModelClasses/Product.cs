@@ -14,6 +14,7 @@ namespace DbCenter.ModelClasses
         public Nullable<int> CompanyID { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<int> PhotoID { get; set; }
+        public String ProductType { get; set; }
 
         public virtual Company Company { get; set; }
         public virtual Photo Photo { get; set; }

@@ -29,7 +29,7 @@ namespace E_Sale.AutoMapper
 
 
                 cfg.CreateMap<DbCenter.ModelClasses.Product, Models.MVCProduct>();
-                cfg.CreateMap<Models.MVCProduct, DbCenter.ModelClasses.Product>();
+                cfg.CreateMap<MVCProduct, Product>();
 
 
                 cfg.CreateMap<DbCenter.ModelClasses.Comment, Models.MVCComment>();

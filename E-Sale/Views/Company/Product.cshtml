@@ -1,5 +1,5 @@
 ﻿@model E_Sale.ViewModel.ProductViewModel
-
+@using E_Sale.ViewModel
 <link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 
 <style>
@@ -56,11 +56,11 @@
 
 
 <body>
-
+    
     <div class="container-fluid">
         <div class="row content">
             <div class="col-md-3">
-                @Html.Partial("_Company_Sidenav")
+                @Html.Partial("_Company_Sidenav",Model)
             </div>
 
             <div class="col-md-9">
@@ -111,6 +111,24 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ProductType, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select class="form-control" id="ProductType" name="ProductType">
+                                        <option>Clothing</option>
+                                        <option>Phones & Accessories</option>
+                                        <option>Computer & Office</option>
+                                        <option>ConsumerElectronics</option>
+                                        <option>Jewelry & Watches</option>
+                                        <option>Home & Garden</option>
+                                        <option>Bags & shoes</option>
+                                        <option>Toys & Kids</option>
+                                        <option>Sports & Outdoors</option>
+                                        <option>Health & Beauty</option>
+                                        <option>Automobiles & Motorcycles</option>
+                                    </select>
+                                  </div>
+                            </div>
 
                             <div class="form-group">
                                     <label class="control-label col-md-2">Choose Image</label>
@@ -140,6 +158,9 @@
                         </div>
                     </div>
                     <hr />
+
+
+
                     <div class="row" style="margin-top:15px; margin-left:10px; ">
 
                         @{var l = 0;}
@@ -159,8 +180,9 @@
                                 </div>
                             </div>
                         </div>
-
-                            if ((l+1) % 4 == 0)
+                            
+                            l++;
+                            if ((l) % 4 == 0)
                             { 
                                @:</div><div class="row" style="margin-left:10px; margin-top:15px;">
                             }

@@ -1,0 +1,58 @@
+﻿@model E_Sale.Models.MVCProduct
+
+
+<style>
+    body {
+        background-image: url(../../assets/images/pw_maze_white.png);
+        background-repeat: repeat;
+    }
+
+    .page-header1 {
+        margin-top: 0px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+</style>
+<div class="container-fluid" style="margin-top:20px;">
+    <div class="col-md-6 text-center">
+            <img src="~/@Model.Photo.URL" />
+    </div>
+
+    <div class="col-md-6">
+        <div class="thumbnail">
+            <div class="row">
+
+                <div class="col-md-12" style="margin-top:10px; margin-left:10px; margin-right:10px;">
+                    <div class="page-header1">
+                        Product Details
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="col-md-offset-1">@Model.Company.Name</h2>
+
+            <hr />
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1">
+                    <h4>Name :</h4>
+                    <h4>Description :</h4>
+                    <h4>Price :</h4>
+                    <h4>Type :</h4>
+                </div>
+                <div class="col-md-6">
+                    <h4>@Model.Name</h4>
+                    <h4>@Model.Description</h4>
+                <h4>@Model.Price</h4>
+                <h4>@Model.ProductType</h4>
+
+            </div>
+                </div>
+        </div>
+    </div>
+</div>

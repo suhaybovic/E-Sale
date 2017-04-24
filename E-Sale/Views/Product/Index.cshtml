@@ -1,0 +1,84 @@
+﻿@model IEnumerable<E_Sale.Models.MVCProduct>
+
+<style>
+
+    body {
+        background-image: url(../../assets/images/pw_maze_white.png);
+        background-repeat: repeat;
+    }
+
+    .thumb {
+        max-height: 200px;
+    }
+
+</style>
+
+
+<div class="container-fluid" style="margin-top:10px;">
+    <div class="row content">
+        <div class="col-sm-3">
+
+            <div class="thumbnail">
+                <ul id="sidenav" class="nav nav-pills nav-stacked">
+                    <li>@Html.ActionLink("Clothing", "Index", new { type = "Clothing" })</li>
+                    <li>@Html.ActionLink("Phones & Accessories", "Index", new { type = "Phones & Accessories" })</li>
+                    <li>@Html.ActionLink("Computer & Office", "Index", new { type = "Computer & Office" })</li>
+                    <li>@Html.ActionLink("ConsumerElectronics", "Index", new { type = "ConsumerElectronics" })</li>
+                    <li>@Html.ActionLink("Jewelry & Watches", "Index", new { type = "Jewelry & Watches" })</li>
+                    <li>@Html.ActionLink("Home & Garden", "Index", new { type = "Home & Garden" })</li>
+                    <li>@Html.ActionLink("Bags & shoes", "Index", new { type = "Bags & shoes" })</li>
+                    <li>@Html.ActionLink("Toys & Kids", "Index", new { type = "Toys & Kids" })</li>
+                    <li>@Html.ActionLink("Sports & Outdoors", "Index", new { type = "Sports & Outdoors" })</li>
+                    <li>@Html.ActionLink("Health & Beauty", "Index", new { type = "Health & Beauty" })</li>
+                    <li>@Html.ActionLink("Automobiles & Motorcycles", "Index", new { type = "Automobiles & Motorcycles" })</li>
+           
+                </ul>
+            </div>
+            
+        </div>
+
+        <div class="col-sm-9">
+
+            <div class="thumbnail">
+
+                <div class="row" style="margin-top:15px; margin-left:10px; ">
+
+                    @{var l = 0;}
+
+
+                    @foreach (var item in Model)
+                    {
+
+
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="~/@item.Photo.URL" class="img-responsive thumb" alt="...">
+                                <div class="caption">
+                                    <h4>@item.Name</h4>
+                                    <p>@item.Price</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        l++;
+                          
+                        if ((l) % 4 == 0)
+                        {
+                            @:</div><div class="row" style="margin-left:10px; margin-top:20px;">
+                        }
+
+                    }
+                </div>
+                        
+                        
+                        
+
+            </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>

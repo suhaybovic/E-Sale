@@ -87,7 +87,6 @@
                         @Html.LabelFor(model => model.Field, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">    
                             @Html.DropDownListFor(m => m.Field, new SelectList(Enum.GetValues(typeof(Field))), new { @class = "form-control" })
-                            
                         </div>
                     </div>
                     

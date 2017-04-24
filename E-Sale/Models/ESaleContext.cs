@@ -13,6 +13,7 @@ namespace E_Sale.Models
         DBCenterContext context = new DBCenterContext();
         public ESaleContext() : base("DB")
         {
+            E_Sale.AutoMapper.AutoMapperApplication.AutoMapperinit();
         }
 
         public void AddFollowing(Following following)
@@ -64,6 +65,11 @@ namespace E_Sale.Models
             return context.getUserByID(id);
         }
 
+        public Product getProductByID(int id)
+        {
+            return context.getProductByID(id);
+        }
+
         public Company getCompanyByID(int id)
         {
             return context.getCompanyByID(id);
@@ -73,10 +79,19 @@ namespace E_Sale.Models
         {
             return context.getProductsForCompany(id);
         }
+
+        public List<Product> getProductsbyType(string type)
+        {
+            return context.getProductsbyType(type);
+        }
         
         public List<Post> getPostsForCompany(int id)
         {
             return context.getPostsForCompany(id);
+        }
+        public List<Post> getPostsForUser(int id)
+        {
+            return context.getPostsForUser(id);
         }
         public List<Post> getHomeposts(int id)
         {
@@ -96,6 +111,12 @@ namespace E_Sale.Models
             UserFunctions userFunctions = new UserFunctions();
             return userFunctions.CheckFollowing(Companyid,userid);
         }
+
+        public System.Data.Entity.DbSet<E_Sale.Models.MVCProduct> MVCProducts { get; set; }
+
+        public System.Data.Entity.DbSet<E_Sale.Models.MVCCompany> MVCCompanies { get; set; }
+
+        public System.Data.Entity.DbSet<E_Sale.Models.MVCPhoto> MVCPhotoes { get; set; }
 
         
         

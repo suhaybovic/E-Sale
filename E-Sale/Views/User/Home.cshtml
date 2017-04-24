@@ -1,0 +1,129 @@
+﻿@model E_Sale.ViewModel.UserHomeViewModel
+
+<link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'> 
+
+<style>
+
+    body {
+        background-image: url(../../assets/images/pw_maze_white.png);
+        background-repeat: repeat;
+    }
+
+    .cursive {
+        font-family: 'Exo 2', sans-serif;
+    }
+
+    #prof {
+        margin-top: 10px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .page-header1 {
+        margin-top: 0px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+</style>
+
+<div class="container-fluid" style="margin-top:10px;">
+    <div class="row content">
+        <div class="col-sm-3">
+            <div class="thumbnail">
+                <img id="prof" src="https://placehold.it/350x150" class="img-circle text-center" alt="...">
+                <div class="text-center">
+                    <h4 class="cursive">@Model.User.FirstName</h4>
+                </div>
+            </div>
+
+            <div class="thumbnail" style="margin-top:10px;">
+
+                <div class="col-md-12" style="margin-bottom:10px;  ">
+                    <div class="page-header1" >
+                       Personal Info
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="cursive"> First Name</p> 
+                    </div>
+                    <div class="col-md-8" style="text-align:right">
+                        <p class="cursive">@Model.User.FirstName</p> 
+                    </div>
+                </div>
+
+                <hr style="margin-top:5px; margin-bottom:5px;"/>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="cursive">Last Name</p>
+                    </div>
+                    <div class="col-md-8" style="text-align:right">
+                        <p class="cursive">@Model.User.LastName</p>
+                    </div>
+                </div>
+
+                <hr style="margin-top: 5px; margin-bottom: 5px;" />
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <p class="cursive">Email</p>
+                    </div>
+                    <div class="col-md-10" style="text-align:right">
+                        <p class="cursive">@Model.User.Email</p>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="thumbnail">
+
+                <div class="col-md-12" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+                    <div class="page-header1">
+                        News
+                    </div>
+                </div>
+                <hr />
+                @foreach (var item in Model.listofposts)
+                {
+
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>@item.Text</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="inputtext" type="text" style="min-width:100%;" class="form-control" placeholder="Add Comment">
+                        </div>
+                    </div>
+                    <div id="LikeSection" class="row" style="margin-top:10px;">
+                        <div class="col-md-6">
+
+                            <button id="@(item.ID)l" class="btn btn-default" onclick="LikeButton(@item.ID)">Like</button>
+                            <button type="button" onclick="CommentButton(@item.ID)" class="btn btn-default">Comment</button>
+                        </div>
+                    </div>
+                    <hr />
+
+                }
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+

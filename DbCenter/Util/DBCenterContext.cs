@@ -40,8 +40,13 @@ namespace DbCenter.Util
         {
             return Users.Find(id);
         }
-        
 
+        public Product getProductByID(int id)
+        {
+            return Products.Find(id);
+        }
+        
+       
         public Company getCompanyByID(int id)
         {
             return Companies.Find(id);
@@ -51,10 +56,20 @@ namespace DbCenter.Util
         {
             return Products.Where(s => s.CompanyID == id).ToList();
         }
+        public List<Product> getProductsbyType(string type)
+        {
+            return Products.Where(s => s.ProductType.Equals(type)).ToList();
+        }
+
         public List<Post> getPostsForCompany(int id)
         {
             return Posts.Where(s => s.CompanyID == id).ToList();
         }
+        public List<Post> getPostsForUser(int id)
+        {
+            return Posts.Where(s => s.UserID == id).ToList();
+        }
+       
        
     }
 }

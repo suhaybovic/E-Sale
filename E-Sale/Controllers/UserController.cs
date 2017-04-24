@@ -6,12 +6,28 @@ using System.Web.Mvc;
 using DbCenter.ModelClasses;
 using E_Sale.Models;
 using AutoMapper;
+using E_Sale.ViewModel;
+using System.IO;
 
 namespace E_Sale.Controllers
 {
     public class UserController : Controller
     {
         ESaleContext ESaleContext = new ESaleContext();
+
+        public ActionResult Home(int id)
+        {
+            UserHomeViewModel userHomeViewModel = new UserHomeViewModel();
+            
+            var user=ESaleContext.getUserByID(id);
+            userHomeViewModel.User = Mapper.Map<MVCUser>(user);
+
+            var posts = ESaleContext.getPostsForUser(id);
+            userHomeViewModel.listofposts = Mapper.Map<List<MVCPost>>(posts);
+
+            return View(userHomeViewModel);
+        }
+
 
         public ActionResult SignUp()
         {
@@ -42,7 +58,8 @@ namespace E_Sale.Controllers
 
             if (!result.Any())
             {
-                return RedirectToAction("Index");
+                @ViewBag.errorMessage = "Email And Password not matched !";
+                return View();
             }
             else
             {
@@ -71,15 +88,44 @@ namespace E_Sale.Controllers
         [HttpPost]
         public ActionResult CheckFollowing(int id)
         {
-
             int UserID = (int)Session["UserID"];
-
             List<DbCenter.ModelClasses.Following> t = ESaleContext.CheckFollowing(id, UserID);
-            
             if (t.Any())
                 return new HttpStatusCodeResult(200);
             return new HttpStatusCodeResult(404);
-        } 
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult News(HomeViewModel homeViewModel, HttpPostedFileBase image)
+        {
+            DbCenter.ModelClasses.Photo photoreturned = null;
+            if (image != null)
+            {
+                string path = Path.Combine(Server.MapPath("~/assets/Uploaded_photos"), Path.GetFileName(image.FileName));
+                image.SaveAs(path);
+
+                DbCenter.ModelClasses.Photo photo = new DbCenter.ModelClasses.Photo();
+                photo.URL = "assets/Uploaded_photos/" + image.FileName;
+                photoreturned = ESaleContext.AddPhoto(photo);
+            }
+
+            var post = new DbCenter.ModelClasses.Post();
+
+            post.UserID = (int)Session["UserID"];
+            post.Text = homeViewModel.Text;
+            post.CreationDate = DateTime.Now;
+
+            if (image != null)
+                post.PhotoID = photoreturned.ID;
+            else
+                post.PhotoID = null;
+
+            ESaleContext.AddPost(post);
+            return RedirectToAction("Index","Home");
+        }
 
 
 	}

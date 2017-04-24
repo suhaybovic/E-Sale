@@ -33,33 +33,29 @@
                     }
 
                 });
-                        </script>
-        
-        
-        
-    <script>
+       
 
-        function Follow(x) {
-            var value = x;
-            var data = { id: value};
+            function Follow(x) {
+                var value = x;
+                var data = { id: value};
 
-            var url = '@Url.Action("FollowCompany", "User")';
+                var url = '@Url.Action("FollowCompany", "User")';
 
-            $.ajax({
-                url: url,
-                data: data,
-                method: "POST",
-                success: function (result) 
-                {
-                    document.getElementById('Follow-div').style.backgroundColor = "limegreen";
-                    document.getElementById('Follow-div').innerHTML= "Following &nbsp<span class='glyphicon glyphicon-ok'>";
-                },
-                error: function (jqXHR, exception) {
-                    console.log("error");
-                }
-            });
+                $.ajax({
+                    url: url,
+                    data: data,
+                    method: "POST",
+                    success: function (result) 
+                    {
+                        document.getElementById('Follow-div').style.backgroundColor = "limegreen";
+                        document.getElementById('Follow-div').innerHTML= "Following &nbsp<span class='glyphicon glyphicon-ok'>";
+                    },
+                    error: function (jqXHR, exception) {
+                        console.log("error");
+                    }
+                });
 
-        }
+            }
 
 
     </script>
